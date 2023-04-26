@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.kevinestrada.SpringCommerceBackend.models.ERole;
 import com.kevinestrada.SpringCommerceBackend.models.Role;
@@ -25,6 +26,7 @@ import com.kevinestrada.SpringCommerceBackend.security.services.UserDetailsImpl;
 import com.kevinestrada.SpringCommerceBackend.services.AuthService;
 import com.kevinestrada.SpringCommerceBackend.services.utility.AuthenticatedUserResponse;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
@@ -75,7 +77,6 @@ public class AuthServiceImpl implements AuthService {
     public MessageResponse signupUser(SignupRequest signupRequest) {
         User user = new User(signupRequest.getUsername(), signupRequest.getEmail(),
                 encoder.encode(signupRequest.getPassword()));
-
         Set<String> strRoles = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
         if (strRoles == null) {

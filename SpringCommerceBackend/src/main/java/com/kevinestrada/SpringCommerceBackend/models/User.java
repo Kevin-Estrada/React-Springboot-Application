@@ -3,6 +3,7 @@ package com.kevinestrada.SpringCommerceBackend.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
+@Table(name = "_users", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email") })
 public class User {
     @Id
@@ -27,15 +28,18 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
+    @Column(name = "username")
     private String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
+    @Column(name = "email")
     private String email;
 
     @NotBlank
     @Size(max = 120)
+    @Column(name = "password")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)

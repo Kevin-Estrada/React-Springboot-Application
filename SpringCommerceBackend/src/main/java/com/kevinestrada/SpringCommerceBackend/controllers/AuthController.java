@@ -27,6 +27,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         AuthenticatedUserResponse authUserResponse = authService.authenticateRequest(loginRequest);
+        System.out.println(authUserResponse.toString());
         return ResponseEntity.ok(new JwtResponse(authUserResponse.getJwt(), authUserResponse.getUserDetails().getId(),
                 authUserResponse.getUserDetails().getUsername(), authUserResponse.getUserDetails().getEmail(),
                 authUserResponse.getRoles()));
